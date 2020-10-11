@@ -55,7 +55,7 @@ function show(){
 
 为每个格子添加 `click` 监听事件，当触发点击事件时调用 `move()` 函数，更新棋盘中的落子情况。
 
-```
+```javascript
 cell.addEventListener("click", () => move(i, j));
 ```
 
