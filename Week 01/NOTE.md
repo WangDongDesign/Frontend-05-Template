@@ -8,7 +8,7 @@
 
 可用二位数组表示 3 * 3 棋盘，每个格子有三种状态：空（0）、甲方（1）、乙方（2）。
 
-```
+```javascript
 let pattern = [
     [2, 0, 0],
     [0, 1, 0],
@@ -18,7 +18,7 @@ let pattern = [
 
 后期为简化数据结构，便于数据的处理和减小内存空间，用一维数组表示更佳。
 
-```
+```javascript
 let pattern = [
     2, 0, 0,
     0, 1, 0,
@@ -32,7 +32,7 @@ let pattern = [
 
 通过 `show()` 函数，遍历每个格子中的数值状态，在页面中进行相应的绘制。
 
-```
+```javascript
 function show(){
     let board = document.getElementById("board");
     for(let i = 0; i < 3; i++){
@@ -59,7 +59,7 @@ function show(){
 cell.addEventListener("click", () => move(i, j));
 ```
 
-```
+```javascript
 function move(x, y){
     pattern[x][y] = color;
     color = 3 - color;
@@ -78,7 +78,7 @@ function move(x, y){
 - 正对角线满 3 子
 - 反对角线满 3 子
 
-```
+```javascript
 function check(){
     for(let i = 0; i < 3; i++){
         let win = true;
@@ -130,10 +130,10 @@ function check(){
 
 在 `move()` 函数中添加胜负判别，并在决出胜负时弹窗提示。
 
-```
+```javascript
 if(check()){
     alert(color == 2 ? "❌ is winner!" : "⭕ is winner!");
-}`
+}
 ```
 
 <br>
@@ -142,7 +142,7 @@ if(check()){
 
 通过 `willWin()` 函数，在某一方有落子即胜利的可能前，提示该方即将胜利。
 
-```
+```javascript
 function willWin(pattern, color){
     for(let i = 0; i < 3; i++){
         for(let j = 0; j < 3; j++){
@@ -162,7 +162,7 @@ function willWin(pattern, color){
 
 在 `move()` 函数中添加预判，并在日志区打印预判信息。
 
-```
+```javascript
 if(willWin(pattern, color)){
     console.log(color == 2 ? "❌ will win!" : "⭕ will win!")
 }
@@ -174,7 +174,7 @@ if(willWin(pattern, color)){
 
 通过 `bestChoice()` 函数，判断在落子前提示最优落子点和结果预测。其原理为借助 `willWin()` 函数和 `bestChoice()` 函数递归，判断双方是否有胜利的落子路径：如果己方有，则最优落子点为该路径的第一个点；如果对方有，则最优落子点也为该路径的第一个点（阻止对方胜利）；若双方都没有，则没有无最优落子点。
 
-```
+```javascript
 function bestChoice(pattern, color){
     let p;
     if(p = willWin(pattern, color)){
@@ -213,7 +213,7 @@ function bestChoice(pattern, color){
 
 通过 `computerMove()` 函数，让计算机在人落子后选择其最优落子点并下棋，实现人机对战。
 
-```
+```javascript
 function computerMove(){
     let choice = bestChoice(pattern, color);
     if(choice.point){
@@ -245,7 +245,7 @@ function computerMove(){
 
 使用 `setTimeout` 方法的嵌套，实现红绿灯的功能。
 
-```
+```javascript
 function go(){
     green();
     setTimeout(() => {
@@ -266,7 +266,7 @@ function go(){
 
 通过 `sleep` 函数返回  `Promise` 的方式，实现链式的代码，可读性和易维护性优于嵌套式结构。
 
-```
+```javascript
 function sleep(t){
     return new Promise((resolve, reject) => {
         setTimeout(resolve, t)
@@ -291,7 +291,7 @@ function go(){
 
 通过 `async / await` 方法，进一步优化代码结构，虽然是异步代码，但代码呈现形式与同步代码一致。
 
-```
+```javascript
 async function go(){
     while(true){
         green();
@@ -306,7 +306,7 @@ async function go(){
 
 `async / await` 方法还能更好地进行代码修改，实现手动控制红绿灯的功能。
 
-```
+```javascript
 function happen(element, eventName){
     return new Promise((resolve, reject) => {
         element.addEventListener(eventName, resolve, {once: true});
@@ -331,7 +331,7 @@ async function go(){
 
 通过 `Generator` 函数，配合 `yield` 以同步代码的形式实现异步任务。
 
-```
+```javascript
 function* go(){
     while(true){
         green();
