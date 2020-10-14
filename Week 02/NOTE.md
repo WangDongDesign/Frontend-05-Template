@@ -219,7 +219,7 @@ function distance(point){
 
 while(queue.length){
     let [x, y] = queue.take();
-		......
+    ......
 }
 ```
 
